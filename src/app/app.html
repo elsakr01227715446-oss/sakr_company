@@ -55,7 +55,7 @@
       </div>
       <div class="catalogue-toolbar">
         <div class="category-tabs"><button *ngFor="let category of categories" [class.active]="activeCategory === category.label" (click)="setCategory(category.label)"><span>{{ category.icon }}</span>{{ category.label }}</button></div>
-        <label class="search-box"><span>⌕</span><input #searchInput type="search" placeholder="Search parts or tools" [(ngModel)]="searchTerm" /></label>
+        <label class="search-box"><span>⌕</span><input #searchInput type="search" placeholder="Search parts or tools" [value]="searchTerm" (input)="searchTerm = searchInput.value" /></label>
       </div>
       <div class="product-grid">
         <article class="product-card" *ngFor="let product of filteredProducts">
