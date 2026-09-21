@@ -1,0 +1,83 @@
+<div class="site-shell">
+  <div class="announcement"><span class="status-dot"></span> Same-day dispatch on orders before 2pm <span class="announcement-link">See delivery details →</span></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Sakr Company home">
+      <span class="brand-mark">S</span>
+      <span>Sakr<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#catalogue">Shop parts</a>
+      <a href="#software">Repair software</a>
+      <a href="#story">Our standard</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button search-trigger" aria-label="Focus product search" (click)="searchInput.focus()">⌕</button>
+      <button class="cart-button" aria-label="Shopping bag, {{ cartCount }} items">Bag <span>{{ cartCount }}</span></button>
+      <button class="menu-button" aria-label="Toggle menu" (click)="menuOpen = !menuOpen">{{ menuOpen ? '×' : '☰' }}</button>
+    </div>
+    <nav class="mobile-nav" [class.is-open]="menuOpen" aria-label="Mobile navigation">
+      <a href="#catalogue" (click)="menuOpen = false">Shop parts <span>↗</span></a>
+      <a href="#software" (click)="menuOpen = false">Repair software <span>↗</span></a>
+      <a href="#story" (click)="menuOpen = false">Our standard <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-section">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> The repair shop's advantage</p>
+        <h1>Make every<br><em>repair</em> count.</h1>
+        <p class="hero-description">Reliable parts, smart software and the right tools to help independent repair shops work with confidence.</p>
+        <div class="hero-actions">
+          <button class="primary-button" (click)="scrollToProducts()">Build your repair kit <span>↘</span></button>
+          <a class="text-link" href="#story">Why Sakr <span>→</span></a>
+        </div>
+        <div class="hero-proof"><div class="avatar-stack"><span>AS</span><span>MK</span><span>JR</span></div><span>Trusted by <strong>2,400+</strong> repair pros</span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-note note-top"><span>01</span><strong>Precision<br>over guesswork</strong></div>
+        <div class="hero-image-wrap"><img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1300&q=88" alt="Technician working on a phone repair" /></div>
+        <div class="visual-note note-bottom"><span class="arrow-circle">↗</span><strong>Tools that<br>show up for you</strong></div>
+        <div class="sun-stamp">SAKR<br><span>EST. 2012</span></div>
+      </div>
+    </section>
+
+    <section class="brand-strip" aria-label="Compatible device brands">
+      <span class="brand-strip-label">Parts for the phones<br>people actually use</span>
+      <div class="brand-list"><span *ngFor="let brand of brands">{{ brand }}</span></div>
+    </section>
+
+    <section class="catalogue-section" id="catalogue">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> Curated for busy benches</p><h2>Your next great<br><em>repair</em> starts here.</h2></div>
+        <p class="section-intro">Stock the essentials your customers need. Tested components, honest specs, no mysterious middlemen.</p>
+      </div>
+      <div class="catalogue-toolbar">
+        <div class="category-tabs"><button *ngFor="let category of categories" [class.active]="activeCategory === category.label" (click)="setCategory(category.label)"><span>{{ category.icon }}</span>{{ category.label }}</button></div>
+        <label class="search-box"><span>⌕</span><input #searchInput type="search" placeholder="Search parts or tools" [(ngModel)]="searchTerm" /></label>
+      </div>
+      <div class="product-grid">
+        <article class="product-card" *ngFor="let product of filteredProducts">
+          <div class="product-image"><img [src]="product.image" [alt]="product.name" /><span class="product-tag" *ngIf="product.tag">{{ product.tag }}</span><button class="quick-add" (click)="addToCart(product)" [attr.aria-label]="'Add ' + product.name + ' to bag'">+</button></div>
+          <div class="product-details"><div><p>{{ product.category }}</p><h3>{{ product.name }}</h3></div><strong>{{ product.price }}</strong></div>
+        </article>
+      </div>
+      <p class="empty-state" *ngIf="filteredProducts.length === 0">No essentials found. Try another search or category.</p>
+      <div class="catalogue-footer"><span>Showing {{ filteredProducts.length }} of {{ products.length }} essentials</span><a href="#catalogue">View all inventory <span>→</span></a></div>
+    </section>
+
+    <section class="software-section" id="software">
+      <div class="software-visual"><span class="floating-label">REPAIR OS / 02</span><div class="screen-card"><div class="screen-top"><span class="mini-logo">S</span><span>RepairOS <small>by Sakr</small></span><span class="online-dot"></span></div><div class="screen-body"><p>Today's bench</p><strong>12 <small>active repairs</small></strong><div class="progress-line"><span></span></div><div class="screen-row"><span>iPhone 13 Pro</span><b>Ready</b></div><div class="screen-row"><span>Galaxy S22</span><b>Testing</b></div><div class="screen-row"><span>Oppo Reno 8</span><b>Parts ordered</b></div></div></div></div>
+      <div class="software-copy"><p class="eyebrow"><span class="eyebrow-line"></span> Less admin. More fixing.</p><h2>Run your bench<br>like a <em>business.</em></h2><p>RepairOS keeps your jobs, customers, parts and payments in one calm, clear place. Designed for people who'd rather be fixing phones.</p><a class="primary-button dark-button" href="#contact">Explore RepairOS <span>↗</span></a></div>
+    </section>
+
+    <section class="story-section" id="story">
+      <div><p class="eyebrow"><span class="eyebrow-line"></span> A note from Ahmed Sakr</p><blockquote>“A good repair gives a phone a second life. We build the tools that make that possible.”</blockquote><p class="signature">Ahmed Sakr <span>Founder & CEO</span></p></div>
+      <div class="story-side"><p>Sakr Company began with one workbench, a screwdriver set and a belief that independent repair should feel professional from the first customer to the last screw.</p><a class="text-link" href="#contact">Meet the company <span>→</span></a></div>
+    </section>
+  </main>
+
+  <footer id="contact"><div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark">S</span><span>Sakr<span class="brand-dot">.</span></span></a><p>Built for the people<br>who keep phones going.</p></div><div class="footer-links"><div><p>Explore</p><a href="#catalogue">Parts & accessories</a><a href="#software">RepairOS</a></div><div><p>Support</p><a href="#contact">Contact the team</a><a href="#contact">Delivery & returns</a></div><div><p>Connect</p><a href="mailto:hello@sakr.company">hello@sakr.company</a><a href="#contact">Instagram ↗</a></div></div><div class="footer-bottom"><span>© 2026 Sakr Company</span><span>Made with care in Egypt</span></div></footer>
+  <div class="toast" [class.visible]="notice">{{ notice }} <span>✓</span></div>
+</div>
